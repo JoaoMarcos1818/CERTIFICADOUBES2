@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Validação de CIE - Meia Entrada</title>
+
+<style>
+    /* --- VARIÁVEIS DE CORES --- */
+    :root {
+        --primary-blue-dark: #0B5A9C;
+        --primary-blue-medium: #1E73BE;
+        --accent-blue-light: #E6F0FA;
+        --success-green-light: #DFF3E4;
+        --success-green-text: #2E7D32;
+        --text-black: #000000;
+        --text-dark-gray: #333333;
+        --text-light-gray: #6F6F6F;
+        --border-gray: #DDDDDD;
+        --footer-blue-dark: #1C2E3F;
+        --footer-text-white: #FFFFFF;
+        --white: #FFFFFF;
+    }
+
+    /* --- RESET E BASE --- */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: sans-serif;
+        background-color: var(--white);
+        color: var(--text-black);
+        line-height: 1.5;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 480px;
+        background-color: var(--white);
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    /* --- HEADER --- */
+    header {
+        background-color: var(--primary-blue-dark);
+        padding: 12px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+    }
+
+    .logo {
+        background-color: var(--primary-blue-medium);
+        color: var(--white);
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: bold;
+        border: 1px solid rgba(255,255,255,0.3);
+        text-decoration: none;
+    }
+
+    .menu-icon {
+        color: var(--white);
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    /* --- MAIN CONTENT --- */
+    main {
+        padding: 20px 15px;
+        flex: 1;
+    }
+
+    .section-title {
+        font-size: 20px;
+        color: var(--primary-blue-medium);
+        font-weight: bold;
+        margin-bottom: 8px;
+        text-align: left;
+    }
+
+    .divider {
+        width: 60px;
+        height: 3px;
+        background-color: var(--primary-blue-medium);
+        margin-bottom: 20px;
+    }
+
+    .status-banner {
+        background-color: var(--success-green-light);
+        color: var(--success-green-text);
+        text-align: center;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 16px;
+        margin-bottom: 15px;
+        border: 1px solid rgba(46, 125, 50, 0.2);
+    }
+
+    .description {
+        color: var(--text-black);
+        margin-bottom: 25px;
+        font-size: 14px;
+    }
+
+    /* Área de Dados */
+    .data-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    @media (min-width: 400px) {
+        .data-section {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+    }
+
+    .data-list {
+        flex: 1;
+    }
+
+    .data-item {
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+    .data-label {
+        font-weight: bold;
+        color: var(--text-black);
+        display: block;
+    }
+
+    .data-value {
+        font-weight: regular;
+        color: var(--text-black);
+        word-break: break-word;
+    }
+
+    /* --- COLUNA DA FOTO (AJUSTADA PARA ENQUADRAR AUTOMATICAMENTE) --- */
+    .photo-column {
+        width: 120px;
+        height: 160px; /* Altura fixa essencial para o corte */
+        flex-shrink: 0;
+        margin-left: 0;
+        border-radius: 8px;
+        overflow: hidden; /* Corta o que estiver fora do quadrado */
+        background-color: #f0f0f0; /* Fundo cinza enquanto carrega */
+        border: 1px solid var(--border-gray);
+    }
+
+    @media (min-width: 400px) {
+        .photo-column {
+            margin-left: 20px;
+        }
+    }
+
+    /* AQUI ESTÁ O SEGREDO DO ENQUADRAMENTO */
+    .student-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Faz a imagem cobrir toda a área sem distorcer */
+        display: block;
+    }
+
+    /* --- CERTIFICADO --- */
+    .cert-section {
+        margin-bottom: 40px;
+    }
+
+    .cert-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: var(--text-dark-gray);
+        margin-bottom: 10px;
+    }
+
+    .cert-box {
+        background-color: var(--white);
+        border: 1px solid var(--border-gray);
+        padding: 15px;
+        border-radius: 4px;
+        overflow-x: auto;
+    }
+
+    .cert-text {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 11px;
+        color: var(--text-dark-gray);
+        white-space: pre-wrap;
+        word-break: break-all;
+        line-height: 1.4;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+        background-color: var(--footer-blue-dark);
+        color: var(--footer-text-white);
+        padding: 30px 20px;
+        text-align: center;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        font-size: 13px;
+    }
+
+    .footer-link {
+        color: var(--white);
+        text-decoration: none;
+        opacity: 0.8;
+    }
+
+    .footer-link:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+
+    .copyright {
+        font-size: 11px;
+        opacity: 0.6;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 15px;
+    }
+
+    @media (max-width: 420px) {
+        body { background-color: var(--white); }
+        .container { box-shadow: none; max-width: 100%; }
+    }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header>
+        <a href="#" class="logo">meiaentrada.org.br</a>
+        <div class="menu-icon">☰</div>
+    </header>
+
+    <main>
+        <!-- TÍTULO -->
+        <div class="section-title">Validação de CIE (Carteira de Identificação Estudantil)</div>
+        <div class="divider"></div>
+
+        <!-- BANNER DE STATUS -->
+        <div class="status-banner">
+            Documento válido!
+        </div>
+
+        <!-- DESCRIÇÃO -->
+        <p class="description">
+            A carteira de identificação estudantil apresentada foi validada junto à base de dados da UBES. Os dados conferem com a matrícula ativa na instituição de ensino informada.
+        </p>
+
+        <!-- DADOS DO ESTUDANTE -->
+        <div class="data-section">
+            
+            <!-- Coluna Esquerda: Lista -->
+            <div class="data-list">
+                <div class="data-item">
+                    <span class="data-label">Nome:</span>
+                    <span class="data-value">MARIANA SILVA DE OLIVEIRA</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Instituição:</span>
+                    <span class="data-value">Centro Universitário de Excelência Eniac - ENIAC</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Curso:</span>
+                    <span class="data-value">Enfermagem</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Documento de Identificação:</span>
+                    <span class="data-value">9051732846</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Emissor:</span>
+                    <span class="data-value">UBES</span>
+                </div>
+            </div>
+
+            <!-- Coluna Direita: Foto (Enquadrada Automaticamente) -->
+            <div class="photo-column">
+                <!-- CAMINHO DA FOTO CONFIGURADO -->
+                <img src="assets/FOTO MARIANA.jpeg" alt="Foto do Estudante" class="student-photo">
+            </div>
+        </div>
+
+        <!-- SEÇÃO CERTIFICADO PEM -->
+        <div class="cert-section">
+            <div class="cert-title">Certificado de Atributo em formato PEM</div>
+            <div class="cert-box">
+                <div class="cert-text">-----BEGIN CERTIFICATE-----
+MIIDazCCAlOgAwIBAgIUH5v9K1v2Q0zX8Y7L4zW5R8P2Q3jMA0GCSqGSIb3DQEBCwUA
+MEUxCzAJBgNVBAYTAlJSMQ8wDQYDVQQIDAZTZWFvIFBhdWxvMQ8wDQYDVQQHDAZT
+ZWFvIFBhdWxvMQ4wDAYDVQQKDAVVQkVTAiGA8yMDI2MDIwNTEyNTQ0N1oYDzIwMjYw
+MzA3MTI1NDQ3WjBFMQswCQYDVQQGEwJCUjEPMA0GA1UECAwGU2VvIFBhdWxvMQ8w
+DQYDVQQHDAZTZWFvIFBhdWxvMQ4wDAYDVQQKDAVVQkVTAiGA8yMDI2MDIwNTEyNTQ0
+N1oYDzIwMjYwMzA3MTI1NDQ3WjBFMQswCQYDVQQGEwJCUjEPMA0GA1UECAwGU2Vv
+IFBhdWxvMQ8wDQYDVQQHDAZTZWFvIFBhdWxvMQ4wDAYDVQQKDAVVQkVTAiGA8yMDI2
+MDIwNTEyNTQ0N1oYDzIwMjYwMzA3MTI1NDQ3WjBFMQswCQYDVQQGEwJCUjEPMA0GA
+1UECAwGU2VvIFBhdWxvMQ8wDQYDVQQHDAZTZWFvIFBhdWxvMQ4wDAYDVQQKDAVVQkVT
+-----END CERTIFICATE-----</div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-links">
+            <a href="#" class="footer-link">Home</a>
+            <a href="#" class="footer-link">Notícias</a>
+            <a href="#" class="footer-link">Lei da Meia-entrada</a>
+            <a href="#" class="footer-link">Chaves públicas</a>
+            <a href="#" class="footer-link">FAQ</a>
+            <a href="#" class="footer-link">Termos de Uso</a>
+            <a href="#" class="footer-link">Política de Privacidade</a>
+        </div>
+        <div class="copyright">
+            meiaentrada.org.br – Todos os Direitos Reservados 2026
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>
